@@ -11,5 +11,10 @@ pipeline {
                 sh 'docker build -t secure-app:${BUILD_NUMBER} .'
             }
         }
+        stage('Scan image') {
+            steps {
+                sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image secure-app:${BUILD_NUMBER}'
+            }
+        }
     }
 }
