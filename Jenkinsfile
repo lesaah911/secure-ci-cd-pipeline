@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Scan secrets') {
             steps {
-                sh 'docker run --rm -v $(pwd):/repo zricethezav/gitleaks:latest detect --source=/repo --no-banner'
+                sh 'docker run --rm -v dockersproject_jenkins_home:/data zricethezav/gitleaks:latest detect --source=/data/workspace/secure-ci-cd-pipeline --no-banner'
             }
         }
         stage('Build') {
