@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Scan image') {
             steps {
-                sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image secure-app:${BUILD_NUMBER}'
+                sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 1 secure-app:${BUILD_NUMBER}'
             }
         }
     }
