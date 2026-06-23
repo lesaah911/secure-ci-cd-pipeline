@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Scan code') {
             steps {
-              sh 'docker run --rm -v dockersproject_jenkins_home:/data semgrep/semgrep semgrep scan --config=p/security-audit /data/workspace/secure-ci-cd-pipeline'
+              sh 'docker run --rm -v dockersproject_jenkins_home:/data semgrep/semgrep semgrep scan --config=p/python /data/workspace/secure-ci-cd-pipeline'
             }
         }
     }
