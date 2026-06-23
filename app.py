@@ -1,4 +1,4 @@
-import os
+import subprocess
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -10,7 +10,11 @@ def home():
 @app.route("/ping")
 def ping():
     host = request.args.get("host", "")
-    return os.popen(f"ping -c 1 {host}").read()
+    result = subprocess.run(
+        ["ping", "-c", "1", host],
+        capture_output=True, text=True, timeout=5
+    )
+    return result.stdout
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="127.0.0.1", port=5000)
